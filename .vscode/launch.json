@@ -1,0 +1,50 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "xRun Non Blocking",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/main.py",
+            "console": "integratedTerminal",
+            "args": ["--host", "0.0.0.0", "--port", "5000"],
+            "justMyCode": true
+        },
+        {
+            "name": "Run Non Blocking",
+            "type": "python",
+            "request": "launch",
+            "module": "uvicorn",
+            "args": ["main:app", "--host", "0.0.0.0", "--port", "5000"],
+            "justMyCode": true,
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Run as Server",
+            "type": "docker",
+            "request": "launch",
+            "platform": "python",
+            "dockerBuild": {
+                "context": "${workspaceFolder}",
+                "dockerfile": "Dockerfile",
+                "tag": "my-fastapi-app:latest"
+            },
+            "ports": [
+                {
+                    "containerPort": 5000,
+                    "hostPort": 5000
+                }
+            ]
+        },
+        {
+            "name": "xRun as Server",
+            "type": "docker",
+            "request": "launch",
+            "platform": "python",
+            "preLaunchTask": "docker-build",
+            "dockerOptions": {
+                "ports": ["5000:5000"]
+            }
+        },
+    ]
+}

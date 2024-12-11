@@ -1,0 +1,113 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "docker-build",
+            "type": "shell",
+            "command": "docker-compose build"
+        },
+        {
+            "label": "docker-rebuild",
+            "type": "shell",
+            "command": "docker-compose build --no-cache"
+        },
+        {
+            "label": "docker-up",
+            "type": "shell",
+            "command": "docker-compose up"
+        },
+        {
+            "label": "docker-down",
+            "type": "shell",
+            "command": "docker-compose down"
+        },
+        {
+            "label": "docker-restart",
+            "type": "shell",
+            "command": "docker-compose restart"
+        },
+        {
+            "label": "1 Compile",
+            "type": "shell",
+            "command": "docker build -t my-fastapi-app .",
+            // "command": "docker-compose build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "2 Recompile",
+            "type": "shell",
+            // "command": "docker run -it -d -p 5000:5000 my-fastapi-app",
+            "command": "docker-compose up -d --build --force-recreate",
+            "problemMatcher": "$python",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "3 Stop",
+            "type": "shell",
+            "command": "docker-compose down",
+            "problemMatcher": {
+                "owner": "docker",
+                "source": "docker",
+                "fileLocation": ["relative", "${workspaceFolder}"],
+                "pattern": {
+                    "regexp": "^(.*):(\\d+):(\\d+): (error|warning): (.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "severity": 4,
+                    "message": 5
+                }
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "xRecompile",
+            "type": "shell",
+            "command": "docker-compose build --no-cache",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "Compile (Recompile and Restart)",
+            "type": "shell",
+            "command": "docker-compose up --build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "Restart",
+            "type": "shell",
+            "command": "docker-compose restart",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "shared"
+            }
+        },
+
+    ]
+}
