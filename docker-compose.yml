@@ -1,9 +1,14 @@
-version: '3.8'
-
 services:
   my-fastapi-app:
-    build: .
+    build:
+      context: .
+    image: hsris/fastapi-app
+    container_name: fastapi_cont
     ports:
       - "5000:5000"
-    container_name: python-fast-api
-    # name: my-custom-service-name
+    networks:
+      - kong-net
+
+networks:
+  kong-net:
+    external: true
